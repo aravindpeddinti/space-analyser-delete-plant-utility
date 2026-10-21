@@ -1,0 +1,4 @@
+PyQt5>=5.15
+oracledb>=2.0
+pyodbc>=5.0
+pyinstaller>=6.0

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Space Analyzer User Guide</title>
+<style>
+  :root{--ink:#1A2433;--muted:#5E6B80;--line:#DCE1E8;--panel:#EEF1F5;--paper:#fff;--accent:#2952CC;--accent-soft:#E4EBFB;--safe-bg:#E3F4EC;--safe-fg:#1E7A50;--review-bg:#FCF1DD;--review-fg:#9A5B0B;--leave-bg:#E8EBF0;--leave-fg:#5E6B80;--danger:#C43D3D;}
+  *{box-sizing:border-box;}
+  html{background:var(--panel);}
+  body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,sans-serif;font-size:16px;line-height:1.6;color:var(--ink);}
+  .page{max-width:860px;margin:32px auto;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:56px 64px 64px;}
+  @media(max-width:700px){.page{margin:0;border-radius:0;padding:28px 20px;}}
+  h1{font-size:2.4rem;line-height:1.15;margin:0 0 8px;font-weight:600;letter-spacing:-.02em;}
+  .lede{font-size:1.15rem;color:var(--muted);margin:0 0 28px;max-width:62ch;}
+  .meta{font-size:.9rem;color:var(--muted);border-top:1px solid var(--line);padding-top:14px;}
+  h2{font-size:1.5rem;font-weight:600;margin:52px 0 12px;padding-top:20px;border-top:2px solid var(--ink);letter-spacing:-.01em;}
+  h2 .num{color:var(--accent);margin-right:10px;font-variant-numeric:tabular-nums;}
+  h3{font-size:1.12rem;font-weight:600;margin:28px 0 6px;}
+  p,li{max-width:72ch;}
+  ul,ol{padding-left:1.4em;}
+  li{margin:4px 0;}
+  a{color:var(--accent);}
+  strong{font-weight:600;}
+  kbd{font-size:.85em;font-weight:600;background:var(--paper);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 7px;white-space:nowrap;}
+  code{font-family:Consolas,"Cascadia Mono",monospace;font-size:.9em;background:var(--panel);border-radius:4px;padding:1px 6px;}
+  .btn{display:inline-block;font-size:.88em;font-weight:600;white-space:nowrap;border:1px solid var(--line);border-radius:7px;padding:0 9px;background:var(--paper);}
+  .btn.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .btn.danger{color:var(--danger);border-color:#F0C4C4;}
+  .badge{display:inline-block;font-size:.8em;font-weight:600;border-radius:10px;padding:1px 10px;}
+  .safe{background:var(--safe-bg);color:var(--safe-fg);}
+  .review{background:var(--review-bg);color:var(--review-fg);}
+  .leave{background:var(--leave-bg);color:var(--leave-fg);}
+  .toc{background:var(--panel);border-radius:10px;padding:20px 28px;margin:28px 0 0;}
+  .toc h4{margin:0 0 8px;font-size:1rem;}
+  .toc ol{columns:2;column-gap:40px;margin:0;padding-left:1.3em;}
+  .toc li{margin:3px 0;break-inside:avoid;}
+  @media(max-width:700px){.toc ol{columns:1;}}
+  .note,.warn{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0;padding:12px 18px;margin:18px 0;}
+  .warn{border-left-color:#E0982E;background:#FDF6E9;}
+  .note p,.warn p{margin:4px 0;}
+  table{width:100%;border-collapse:collapse;margin:14px 0 6px;font-size:.95rem;}
+  th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line);}
+  th{font-weight:600;color:var(--muted);font-size:.88rem;border-bottom:2px solid var(--line);}
+  td:first-child{white-space:nowrap;}
+  td.wrap{white-space:normal;}
+  .steps{counter-reset:s;list-style:none;padding-left:0;}
+  .steps>li{counter-increment:s;position:relative;padding-left:44px;margin:14px 0;}
+  .steps>li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;font-weight:700;font-size:.85rem;display:flex;align-items:center;justify-content:center;}
+  footer{margin-top:52px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.88rem;}
+  @media print{html{background:#fff;}.page{border:none;margin:0;padding:0;max-width:none;}h2{break-after:avoid;}table,.note,.warn{break-inside:avoid;}a{color:inherit;text-decoration:none;}}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <h1>Space Analyzer User Guide</h1>
+  <p class="lede">Find what is filling the disks on your Windows machines and network VMs, and clean it up safely.</p>
+  <p class="meta">For Space Analyzer version 3.0.</p>
+
+  <nav class="toc" aria-label="Contents">
+    <h4>Contents</h4>
+    <ol>
+      <li><a href="#start">Starting the app</a></li>
+      <li><a href="#tour">The main window</a></li>
+      <li><a href="#sem-plants">SEM sites and plants</a></li>
+      <li><a href="#machines">Machines and tabs</a></li>
+      <li><a href="#advisor">Cleanup advisor</a></li>
+      <li><a href="#folders">Biggest folders</a></li>
+      <li><a href="#files">Biggest files</a></li>
+      <li><a href="#types">File types</a></li>
+      <li><a href="#users">By user</a></li>
+      <li><a href="#network">Network VMs</a></li>
+      <li><a href="#schedule">Scheduled maintenance</a></li>
+      <li><a href="#recycle">Recycle Bin</a></li>
+      <li><a href="#filter">The filter box</a></li>
+      <li><a href="#safety">How it keeps you safe</a></li>
+      <li><a href="#help">Problems and questions</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="start"><span class="num">1</span>Starting the app</h2>
+  <p>Double-click <strong>SpaceAnalyzer.exe</strong>. When Windows asks for permission, click <strong>Yes</strong>, the app needs administrator rights so it can read every folder and clean system locations. The window opens full screen and immediately scans the computer you are on.</p>
+  <div class="note"><p>To scan other computers on your network, you only need administrator rights on those machines; everything else is done from inside the app.</p></div>
+
+  <h2 id="tour"><span class="num">2</span>The main window</h2>
+  <p>Across the top are the action buttons: <span class="btn primary">Scan drives</span> (or press <kbd>F5</kbd>), a <strong>Fast scan</strong> switch, <span class="btn">Stop</span>, <span class="btn">Refresh drive list</span>, <span class="btn">Recycle Bin</span>, <span class="btn">Network VMs</span>, and <span class="btn">Schedule</span>.</p>
+  <p>Below those is the <strong>machine bar</strong> (see the next section), then the <strong>drive tiles</strong> showing each drive's free space and how full it is (the bar turns orange above 75% and red above 90%). Tick drives to choose what to scan. Under the tiles are the tabs: Cleanup advisor, Biggest folders, Biggest files, File types, and By user. The status line at the bottom shows what the app is doing and links to the deletion log and debug log.</p>
+
+  <h2 id="sem-plants">SEM sites and plants</h2>
+  <p>After a machine scan finishes, Space Analyzer searches its fixed drives for <code>smartplantv4.ini</code> files and enables <strong>SEM plants</strong>. It searches only the machine selected in the machine bar: your own computer or the VM tab you scanned. The search skips protected Windows folders and directory links.</p>
+  <p>Open <strong>SEM plants</strong> to see sites grouped by site, with plants sorted by folder space, database space, or name. Folder space comes from the machine scan. Database space comes from the SEM plant's schema or database files. These two figures are shown separately because database files already occupy disk space. Shared Oracle schemas, shared tablespaces, and SQL Server databases used by multiple plants are called out separately and excluded from individual plant totals when their ownership is shared or unclear.</p>
+  <p>To remove a plant, select it and choose <strong>Review and delete plant</strong>. Read the fresh list of folders and database items, then type the exact confirmation phrase. Plant deletion is permanent. A site-wide delete is not offered here. If the SEM database or site file cannot be read, the app shows an error row instead of enabling deletion. If only a size query fails, that size appears as unavailable and the warning is included in the site details.</p>
+  <div class="warn"><p>The combined build needs <strong>SpaceAnalyzer.exe</strong> and <strong>Delete Plant Utility CLI.exe</strong> in the same folder. For a VM, the app copies the helper to that VM while it reads the selected site's data. Your account needs the same remote access rights required for the normal VM scan.</p></div>
+
+  <h2 id="machines"><span class="num">3</span>Machines and tabs</h2>
+  <p>Everything on screen always belongs to <strong>one machine</strong>, named in the "Viewing:" bar. Your own computer is the first tab. Each VM you scan becomes its own tab. Click a tab to switch, and the drive tiles, folders, files, types, and advisor all change to that machine. Close a VM tab with the small <strong>x</strong>. Your computer's data and a VM's data are never mixed.</p>
+
+  <h2 id="advisor"><span class="num">4</span>Cleanup advisor</h2>
+  <p>This tab opens first and shows how much space can be freed on the machine you are viewing, grouped into three kinds.</p>
+  <table>
+    <thead><tr><th>Group</th><th>Meaning</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge safe">Safe</span></td><td class="wrap">Ticked automatically. Caches and leftovers that Windows and programs rebuild as needed: temporary files, Windows Update downloads, delivery optimization cache, error reports, browser caches, and the Recycle Bin.</td></tr>
+      <tr><td><span class="badge review">Check first</span></td><td class="wrap">Not ticked. Usually fine but worth a look: crash dumps, old IIS logs, old downloads, old .bak backups, the hibernation file, and Windows component cleanup.</td></tr>
+      <tr><td><span class="badge leave">Leave alone</span></td><td class="wrap">Shown for information only, never delete by hand: Windows Installer, WinSxS, and the page file.</td></tr>
+    </tbody>
+  </table>
+  <p>Each item shows its size and a <strong>Review files</strong> link. Click an item to see its files and tick exactly which to delete. Tick whole items with the box on the left, then click <span class="btn primary">Clean selected</span>.</p>
+  <div class="warn"><p>Cleanup advisor deletes permanently (caches do not go to the Recycle Bin). The confirmation says so before anything happens. Files in use are skipped automatically.</p></div>
+
+  <h2 id="folders"><span class="num">5</span>Biggest folders</h2>
+  <p>Folders in the current location, biggest first, with a share bar, next to a <strong>space map</strong> where each box is sized by how much space it uses. Double-click a folder (or click its box) to go inside; <span class="btn">Up one level</span> or <kbd>Backspace</kbd> to go back. Double-click <strong>Files directly in this folder</strong> to list those files and choose any to delete. Use <span class="btn">Open in Explorer</span> or <span class="btn danger">Move to Recycle Bin</span> on a selection.</p>
+
+  <h2 id="files"><span class="num">6</span>Biggest files</h2>
+  <p>The 500 largest files with type, date, and folder, plus a chart of the top 15. Select files (<kbd>Ctrl</kbd> or <kbd>Shift</kbd>+click), then <span class="btn danger">Move to Recycle Bin</span> or <span class="btn">Show in Explorer</span>. <span class="btn">Export report</span> saves a CSV you can open in Excel.</p>
+
+  <h2 id="types"><span class="num">7</span>File types</h2>
+  <p>Which kinds of files use the most space (<code>.log</code>, <code>.bak</code>, <code>.iso</code>, and so on), with a donut chart. Tip: type a type like <code>.log</code> in the filter box, then open Biggest files to see exactly which files they are.</p>
+
+  <h2 id="users"><span class="num">8</span>By user</h2>
+  <p>Finds which people own the most old data, so you know who to ask before cleaning. Click <span class="btn primary">Analyze users</span> after a scan. It combines two sources:</p>
+  <ul>
+    <li><strong>Windows profiles</strong> under <code>Users\</code> (system profiles like Public are skipped).</li>
+    <li><strong>Team folders named by short name.</strong> Click <span class="btn">Team folders...</span>, list the parent folders where each person has their own sub-folder (for example <code>D:\Projects</code>), save, then analyze. Each immediate sub-folder is treated as a person.</li>
+  </ul>
+  <p>The table ranks people by old-data size, with total size, old-file count, and where their folders are. Set what counts as "old" (default 180 days).</p>
+
+  <h2 id="network"><span class="num">9</span>Network VMs</h2>
+  <p>Click <span class="btn">Network VMs</span> to work with other computers in your domain. The window opens your saved list and automatically checks which are reachable: each shows <em>Ready to scan</em>, <em>Offline</em>, <em>Online, access denied</em> (you are not an admin there), or <em>Online, no shares</em>.</p>
+  <ul>
+    <li><span class="btn primary">Add VM by name</span> or <span class="btn">Import list</span> to build your list; it is saved automatically. <span class="btn">Remove selected</span>, <span class="btn">Edit saved list</span>, and <span class="btn">Reload saved list</span> manage it.</li>
+    <li>Tick one or more <em>Ready to scan</em> VMs and click <span class="btn primary">Scan selected VM(s)</span>. Each is scanned on the VM itself (fast) and opens as its own tab. Several VMs are scanned one after another automatically.</li>
+  </ul>
+  <h3>How a VM scan works</h3>
+  <p>Space Analyzer copies itself to the VM, runs the scan there using Windows' built-in management service, and brings the small result back. You need administrator rights on the VM, and its firewall must allow WMI ("Windows Management Instrumentation (WMI-In)"). On a VM tab you can review folders, files, types, the advisor, and delete or clean, just like on your own computer.</p>
+  <div class="warn"><p>A VM has no Recycle Bin reachable across the network, so deletes on a VM are permanent. The app confirms first and never touches protected Windows locations.</p></div>
+
+  <h2 id="schedule"><span class="num">10</span>Scheduled maintenance</h2>
+  <p>Click <span class="btn">Schedule</span> to have the scan run by itself on a timetable and email folder owners their old files.</p>
+  <ol class="steps">
+    <li>Tick the VMs to include (from your saved Network VMs list).</li>
+    <li>Choose the <strong>days</strong> and <strong>time</strong>, and what counts as an old file.</li>
+    <li>Click <span class="btn primary">Create / update schedule</span>. Windows will run Space Analyzer quietly at those times.</li>
+  </ol>
+  <p>For emails to be sent, two files next to the app must be filled in: <code>OwnerMap.csv</code> (which folder belongs to which person's email) and <code>EmailSettings.ini</code> (your mail server). Each run writes <code>SpaceAnalyzer_Schedule.log</code> so you can see what happened. Use <span class="btn danger">Remove schedule</span> to stop it.</p>
+  <div class="note"><p>The scheduled run only reads and emails; it does not delete anything. People decide what to remove from the list they receive.</p></div>
+
+  <h2 id="recycle"><span class="num">11</span>Recycle Bin</h2>
+  <p>Click <span class="btn">Recycle Bin</span> to see everything in the Recycle Bin on every drive, with each item's original location, size, and the date deleted. Tick items and choose <span class="btn">Restore ticked</span>, <span class="btn danger">Delete ticked</span>, or <span class="btn danger">Empty whole bin</span>. Remember: space is only freed once items are deleted from the bin.</p>
+
+  <h2 id="filter"><span class="num">12</span>The filter box</h2>
+  <p>The box at the top right narrows the lists as you type. Combine any of these:</p>
+  <table>
+    <thead><tr><th>Type this</th><th>To show</th></tr></thead>
+    <tbody>
+      <tr><td><code>.bak</code></td><td class="wrap">Only .bak files (several types: <code>.iso .zip</code>)</td></tr>
+      <tr><td><code>older than 1 year</code></td><td class="wrap">Not changed for a year (also days, weeks, months)</td></tr>
+      <tr><td><code>&gt;1gb</code> / <code>under 50mb</code></td><td class="wrap">By size (kb, mb, gb, tb)</td></tr>
+      <tr><td><code>setup</code></td><td class="wrap">Name or folder contains this word</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="safety"><span class="num">13</span>How it keeps you safe</h2>
+  <ul>
+    <li>Nothing is deleted without a confirmation, with the default answer set to No.</li>
+    <li>Windows system locations (Windows, Program Files, the page file, user-profile roots, and similar) are protected and cannot be deleted.</li>
+    <li>On your own machine, files and folders go to the Recycle Bin first. Advisor cleanups and all VM deletes are permanent.</li>
+    <li>Every deletion is written to <code>SpaceAnalyzer_Log.csv</code> next to the app: time, user, machine, path, size, and result.</li>
+  </ul>
+
+  <h2 id="help"><span class="num">14</span>Problems and questions</h2>
+  <h3>A VM shows "access denied" or "offline"</h3>
+  <p>"Access denied" means your account is not an administrator on that VM. "Offline" means it is switched off or its firewall is blocking file sharing or WMI. For scanning a VM, allow the firewall rule "Windows Management Instrumentation (WMI-In)".</p>
+  <h3>I deleted files but free space didn't change</h3>
+  <p>Files removed on your own machine went to the Recycle Bin, open the <span class="btn">Recycle Bin</span> screen and empty it. Advisor and VM deletes are already permanent.</p>
+  <h3>Some files were skipped</h3>
+  <p>They were in use by a running program. Close it, or clean during a maintenance window, and try again.</p>
+  <h3>Scheduled emails aren't arriving</h3>
+  <p>Check <code>EmailSettings.ini</code> (mail server and From address) and <code>OwnerMap.csv</code> (folders and owner emails) next to the app, and read <code>SpaceAnalyzer_Schedule.log</code> for what happened.</p>
+
+  <footer>Space Analyzer version 3.0. Keep this guide with the app so the whole team can find it.</footer>
+</main>
+</body>
+</html>

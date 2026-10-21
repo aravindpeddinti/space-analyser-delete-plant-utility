@@ -1,0 +1,49 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+
+# PyInstaller
+*.spec
+*.exe
+
+# Logs
+*.log
+logs/
+
+# Space Analyzer machine-local state and reports
+NetworkVMs.csv
+SpaceAnalyzer_Log.csv
+TeamFolders.txt
+OwnerMap.csv
+EmailSettings.ini
+ScheduledVMs.txt
+
+# IDE / OS
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
